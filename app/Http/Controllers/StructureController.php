@@ -1,65 +1,25 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Models;
 
-use App\Models\Structure;
-use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class StructureController extends Controller
+class Structure extends Model
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    use HasFactory;
+     protected $fillable = [
+        'product_id',
+        'part_id',
+        'amount'
+    ];
+       protected function setKeysForSaveQuery($query)
     {
-        //
-    }
+        $query
+            ->where('product_id', '=', $this->getAttribute('product_id'))
+            ->where('part_id', '=', $this->getAttribute('part_id'));
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Structure $structure)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Structure $structure)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Structure $structure)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Structure $structure)
-    {
-        //
+        return $query;
     }
 }
